@@ -1,0 +1,10 @@
+add_library(Gutter gutter_base.h gutter_retrieve.h gutter_apply.h)
+set_target_properties(Gutter PROPERTIES LINKER_LANGUAGE CXX)
+target_compile_features(Gutter PUBLIC cxx_generalized_initializers)
+target_include_directories(Gutter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(Gutter LINK_PUBLIC BitTwiddles)
+install(TARGETS Gutter DESTINATION bin)
+install(FILES gutter_base.h gutter_retrieve.h gutter_apply.h DESTINATION include)
+
+add_executable(testGetGutterSum test_gutter_retrieve_sum.cpp)
+target_link_libraries(testGetGutterSum LINK_PUBLIC Gutter)
